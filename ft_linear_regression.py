@@ -43,9 +43,7 @@ def fonction_de_cout (estimatedPrices, observationsPrice) :
     return arr_error_square_mean
 
 
-def calculate_random_gradient_descente (arr_mileage, arr_observations) :
-    arr_theta0 = np.linspace(0, 12000, 10)
-    arr_theta1 = np.linspace(-0.5, 0.5, 10)
+def calculate_random_gradient_descente (arr_mileage, arr_observations, arr_theta0, arr_theta1) :
     results = np.zeros((len(arr_theta0), len(arr_theta1)))
     for i in range(len(arr_theta0)):
         for j in range (len(arr_theta1)):
@@ -54,22 +52,22 @@ def calculate_random_gradient_descente (arr_mileage, arr_observations) :
     return results
     # return fonction_de_cout(mileage)
 
-def display_cost_fct (arr_performances):
+def display_cost_fct (arr_performances, arr_theta0, arr_theta1):
     fig = plt.figure(2)
     ax = plt.axes(projection="3d")
-    arr_theta0 = np.linspace(0, 10000, 10)
-    arr_theta1 = np.linspace(-0.5, 0.5, 10)
     ax.plot_surface(arr_theta0, arr_theta1, arr_performances, cmap="viridis", edgecolor="green")
     plt.show()
 
 arr_mileage = arr_sorted_datas[:,0]
 arr_observations = arr_sorted_datas[:,1]
+arr_theta0 = np.linspace(9500, 10000, 100)
+arr_theta1 = np.linspace(-0.1, 0., 100)
 
-r = calculate_random_gradient_descente (arr_mileage, arr_observations)
+r = calculate_random_gradient_descente (arr_mileage, arr_observations, arr_theta0, arr_theta1)
 
 print(r)
 
-display_cost_fct(r)
+display_cost_fct(r, arr_theta0, arr_theta1)
 
 exit(13)
 # arr_theta0 = np.linspace(0, 10000, 100)
