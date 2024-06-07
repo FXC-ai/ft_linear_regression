@@ -9,7 +9,6 @@ def normalize_minmax (arr_data):
 def unnormalize_minmax (arr_data, arr_normalized_data):
 	return arr_normalized_data * (arr_data.max() - arr_data.min()) + arr_data.min()
 
-
 def estimatePrice(mileage, theta0, theta1):
 	return theta0 + (theta1 * mileage)
 
@@ -42,10 +41,17 @@ def display_cost_fct(arr_normalized_datas):
 	plt.show()
 	plt.close()
 
-def display_model(arr_datas, arr_estimatedPrice):
-	fig = plt.figure(2)
-	plt.scatter(arr_datas[:,0], arr_datas[:,1], marker = 'P')
-	plt.plot(arr_datas[:,0], arr_estimatedPrice, c = "green")
+def display_values(arr_mileage, arr_price, id_graph):
+	fig = plt.figure(id_graph)
+	plt.scatter(arr_mileage, arr_price, marker = 'P')
+	plt.grid()
+	plt.show()
+	plt.close()
+
+def display_model(arr_mileage, theta0, theta1, id_graph):
+	fig = plt.figure(id_graph)
+	estimatedPrice = estimatePrice(arr_mileage, theta0, theta1)
+	plt.plot(arr_mileage, arr_estimatedPrice, c = "green")
 	plt.grid()
 	plt.show()
 	plt.close()
@@ -93,13 +99,14 @@ while (count < limit) :
 	count+=1
 
 
-display_cost_fct(arr_datas)
+# display_cost_fct(arr_datas)
 arr_estimatedPrice = estimatePrice(arr_normalized_datas[:,0], theta0, theta1)
-display_model(arr_normalized_datas, arr_estimatedPrice)
+display_values(arr_normalized_datas[:,0],arr_normalized_datas[:,1], 1)
+display_values(arr_datas[:,0],arr_datas[:,1], 2)
 
 
-theta0 = unnormalize_minmax(arr_datas[:,1], theta0)
+# theta0 = unnormalize_minmax(arr_datas[:,1], theta0)
 
 # arr_estimatedPrice = estimatePrice(arr_datas[:,0], theta0, theta1)
 
-print(theta0)
+# print(theta0)
