@@ -70,17 +70,18 @@ theta1 = 0
 # print("drv en theta1 : ", drv_cost_fct_theta1 (theta0,theta1), 2*drv_cost_fct_theta1_2 (arr_datas, theta0,theta1))
 
 
-learningRate_theta_0 = -0.1
-learningRate_theta_1 = -0.001
+learningRate_theta_0 = 0.1
+learningRate_theta_1 = 0.001
 count = 0
-limit = 10000
+limit = 100
 
 while (count < limit) :
+	print(count)
 	print("fonction de cout : ", cost_fct(theta0,theta1), cost_fct_2(arr_datas, theta0,theta1))
 	print("drv en theta0 : ", drv_cost_fct_theta0 (theta0,theta1), 2*drv_cost_fct_theta0_2 (arr_datas, theta0,theta1))
 	print("drv en theta1 : ", drv_cost_fct_theta1 (theta0,theta1), 2*drv_cost_fct_theta1_2 (arr_datas, theta0,theta1))
-	new_theta0 = theta0 + learningRate_theta_0 * drv_cost_fct_theta0_2 (arr_datas, theta0,theta1)
-	new_theta1 = theta1 + learningRate_theta_1 * drv_cost_fct_theta1_2 (arr_datas, theta0, theta1)
+	new_theta0 = theta0 - learningRate_theta_0 * drv_cost_fct_theta0_2 (arr_datas, theta0,theta1)
+	new_theta1 = theta1 - learningRate_theta_1 * drv_cost_fct_theta1_2 (arr_datas, theta0, theta1)
 	theta0 = new_theta0
 	theta1 = new_theta1
 	print("nouveau theta 0 = ", theta0)
