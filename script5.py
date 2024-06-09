@@ -31,7 +31,7 @@ def drv_cost_fct_theta1 (arr_datas, theta0, theta1):
 def display_cost_fct(arr_normalized_datas):
 	fig = plt.figure(1)
 	ax = plt.axes(projection="3d")
-	arr_theta0 = np.linspace(5000, 15000, 10)
+	arr_theta0 = np.linspace(7000, 9000, 10)
 	arr_theta1 = np.linspace(-2, 2, 10)
 	values = np.zeros((len(arr_theta0), len(arr_theta1)))
 	for i in range(len(arr_theta0)):
@@ -40,6 +40,37 @@ def display_cost_fct(arr_normalized_datas):
 	ax.plot_surface(arr_theta0, arr_theta1, values, cmap="viridis", edgecolor="green")
 	plt.show()
 	plt.close()
+
+
+# def display_cost_fct(arr_normalized_datas):
+#     fig = plt.figure(figsize=(12, 6))
+
+#     # 3D Surface Plot
+#     ax1 = fig.add_subplot(121, projection='3d')
+#     arr_theta0 = np.linspace(-1, 2, 100)
+#     arr_theta1 = np.linspace(-1, 2, 100)
+#     theta0_grid, theta1_grid = np.meshgrid(arr_theta0, arr_theta1)
+#     values = np.zeros_like(theta0_grid)
+#     for i in range(len(arr_theta0)):
+#         for j in range(len(arr_theta1)):
+#             values[i, j] = cost_fct(arr_normalized_datas, theta0_grid[i, j], theta1_grid[i, j])
+#     ax1.plot_surface(theta0_grid, theta1_grid, values, cmap="viridis", edgecolor="none")
+#     ax1.set_title("Cost Function Surface")
+#     ax1.set_xlabel("Theta0")
+#     ax1.set_ylabel("Theta1")
+#     ax1.set_zlabel("Cost")
+
+#     # Contour Plot
+#     ax2 = fig.add_subplot(122)
+#     contour = ax2.contourf(theta0_grid, theta1_grid, values, cmap="viridis")
+#     fig.colorbar(contour, ax=ax2)
+#     ax2.set_title("Cost Function Contour")
+#     ax2.set_xlabel("Theta0")
+#     ax2.set_ylabel("Theta1")
+
+#     plt.tight_layout()
+#     plt.show()
+
 
 def display_values(arr_mileage, arr_price, id_graph):
 	fig = plt.figure(id_graph)
@@ -84,7 +115,7 @@ theta1 = 0
 learningRate = 0.1
 
 count = 0
-limit = 1000
+limit = 10000
 
 while (count < limit) :
 	print(count)
@@ -101,11 +132,11 @@ while (count < limit) :
 	count+=1
 
 
-# display_cost_fct(arr_datas)
+display_cost_fct(arr_datas)
 arr_estimated_price = estimatePrice(arr_normalized_datas[:,0], theta0, theta1)
 # display_values(arr_normalized_datas[:,0],arr_normalized_datas[:,1], 1)
 
-display_model(arr_normalized_datas[:,0], arr_normalized_datas[:,1], arr_estimated_price, 1)
+# display_model(arr_normalized_datas[:,0], arr_normalized_datas[:,1], arr_estimated_price, 1)
 
 
 arr_estimated_price_unormalized = unnormalize_minmax(arr_datas[:,1] ,arr_estimated_price)
