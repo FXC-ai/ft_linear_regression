@@ -48,13 +48,15 @@ def display_values(arr_mileage, arr_price, id_graph):
 	plt.show()
 	plt.close()
 
-def display_model(arr_mileage, theta0, theta1, id_graph):
+def display_model(arr_mileage, arr_price, arr_estimated_price, id_graph):
 	fig = plt.figure(id_graph)
-	estimatedPrice = estimatePrice(arr_mileage, theta0, theta1)
-	plt.plot(arr_mileage, arr_estimatedPrice, c = "green")
+	plt.scatter(arr_mileage, arr_price, marker='P')
+	plt.plot(arr_mileage, arr_estimated_price, c = "green")
 	plt.grid()
 	plt.show()
 	plt.close()
+
+
 
 
 file = open("data.csv", 'r')
@@ -100,13 +102,35 @@ while (count < limit) :
 
 
 # display_cost_fct(arr_datas)
-arr_estimatedPrice = estimatePrice(arr_normalized_datas[:,0], theta0, theta1)
-display_values(arr_normalized_datas[:,0],arr_normalized_datas[:,1], 1)
-display_values(arr_datas[:,0],arr_datas[:,1], 2)
+arr_estimated_price = estimatePrice(arr_normalized_datas[:,0], theta0, theta1)
+# display_values(arr_normalized_datas[:,0],arr_normalized_datas[:,1], 1)
+
+display_model(arr_normalized_datas[:,0], arr_normalized_datas[:,1], arr_estimated_price, 1)
+
+
+arr_estimated_price_unormalized = unnormalize_minmax(arr_datas[:,1] ,arr_estimated_price)
+
+display_model(arr_datas[:,0], arr_datas[:,1], arr_estimated_price_unormalized, 1)
+
+
+# def display_model(arr_mileage, theta0, theta1, id_graph):
 
 
 # theta0 = unnormalize_minmax(arr_datas[:,1], theta0)
+# theta1 = unnormalize_minmax(arr_datas[:,0], theta1) / unnormalize_minmax(arr_datas[:,1], theta1)
 
-# arr_estimatedPrice = estimatePrice(arr_datas[:,0], theta0, theta1)
+
+# theta1 = (unnormalize_minmax(arr_datas[:,1], theta1) - unnormalize_minmax(arr_datas[:,1], 0)) / (arr_datas[:,0].max() - arr_datas[:,0].min())
+
+# theta1 = theta1 * (arr_datas[:,1].max() - arr_datas[:,1].min()) / (arr_datas[:,0].max() - arr_datas[:,0].min())
+
+
+# display_model(arr_datas[:,0],arr_datas[:,1], theta0, theta1, 2)
+
+# arr_estimatedPrice = estimatePrice(arr_datas[:,0], theta0, theta1 / 100)
+
+# print(arr_datas)
+# print(arr_estimatedPrice.T)
 
 # print(theta0)
+# print(theta1)
