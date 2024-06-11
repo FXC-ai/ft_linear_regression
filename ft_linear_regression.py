@@ -1,118 +1,95 @@
+import sys
 import numpy as np
 import csv
-import matplotlib.pyplot as plt
-from mpl_toolkits import mplot3d
 
-# file = open("data.csv", 'r')
-# reader = csv.reader(file)
-# data = list(reader)
-# del(data[0])
+def read_datas (file_name) :
+	try :
+		file = open(file_name, 'r')
+	except Exception as exc:
+		print("File error : {}".format(exc.__class__))
+		exit(0)
+	reader = csv.reader(file)
+	return list(reader)
 
-# nbr_data = len(data)
+def normalize_minmax (arr_data):
+	return (arr_data - arr_data.min()) / (arr_data.max() - arr_data.min())
 
-# print("Nombre d'observations = {}\n".format(nbr_data))
+def unnormalize_minmax (arr_data, arr_normalized_data):
+	return arr_normalized_data * (arr_data.max() - arr_data.min()) + arr_data.min()
 
-# arr_datas = np.array(data, dtype = 'i')
-# arr_sorted_datas = arr_datas[arr_datas[:,1].argsort()]
-# print("Données triées par ordre décroissant de kilométrage : ")
-# print(arr_datas)
-# print("\n")
+def estimatePrice(mileage, theta0, theta1):
+	return theta0 + (theta1 * mileage)
 
+def cost_fct(arr_datas, theta0, theta1):
+	arr_estimatedPrice = estimatePrice(arr_datas[:,0], theta0, theta1)
+	arr_errors = (arr_estimatedPrice - arr_datas[:,1])**2
+	result = arr_errors.mean()
+	return result
 
-arr_sorted_datas = np.array([[10,20,30,40],[25,48,66,88]])
-arr_sorted_datas = arr_sorted_datas.T
-print(arr_sorted_datas)
+def drv_cost_fct_theta0 (arr_datas, theta0, theta1):
+	arr_estimatedPrice = estimatePrice(arr_datas[:,0], theta0, theta1)
+	arr_errors = (arr_estimatedPrice - arr_datas[:,1])
+	return arr_errors.mean()
 
+def drv_cost_fct_theta1 (arr_datas, theta0, theta1):
+	arr_estimatedPrice = estimatePrice(arr_datas[:,0], theta0, theta1)
+	arr_errors = (arr_estimatedPrice - arr_datas[:,1]) * arr_datas[:,0]
+	return arr_errors.mean()
 
-# Calcule pour un kilometrage donné le prix de la voiture
-def estimatePrice (x ,theta0, theta1) :
-    return theta0 + (theta1 * x)
+args = sys.argv
+if len(args) != 2 :
+	print("Arguments provided are inconsistents. Need to povide the path of a valid csv file.")
+	exit(0)
 
-# Calcule pour tous le kilometrages donnés le prix estimé
-def calculate_model(arr_mileage, theta0, theta1):
-    estimatedPrices = estimatePrice(arr_mileage, theta0, theta1)
-    return estimatedPrices
+file_name = args[-1]
+data = read_datas (file_name)
+del(data[0])
 
-# Evalue la performance du modele
-def fonction_de_cout (estimatedPrices, observationsPrice) :
-    arr_error_square = (estimatedPrices - observationsPrice)**2
-    arr_error_square_mean = arr_error_square.mean()
-    return arr_error_square_mean
-
-
-def calculate_random_gradient_descente (arr_mileage, arr_observations, arr_theta0, arr_theta1) :
-    results = np.zeros((len(arr_theta0), len(arr_theta1)))
-    for i in range(len(arr_theta0)):
-        for j in range (len(arr_theta1)):
-            results[i,j] = fonction_de_cout(calculate_model(arr_mileage, arr_theta0[i], arr_theta1[j]), arr_observations)
-
-    return results
-    # return fonction_de_cout(mileage)
-
-def display_cost_fct (arr_performances, arr_theta0, arr_theta1):
-    fig = plt.figure(2)
-    ax = plt.axes(projection="3d")
-    ax.plot_surface(arr_theta0, arr_theta1, arr_performances, cmap="viridis", edgecolor="green")
-    plt.show()
-
-# Calcule la dérivée de la fonction de cout selon theta0
-def derivative_cost_fct_theta0 (estimatedPrice, observationsPrice) :
-    arr_error = (estimatedPrice - observationsPrice)
-    print ("estimatedPrice : {} \n\n oservationPrice : {} \n\n arr_error {} \n". format(estimatedPrice, observationsPrice, arr_error))
-    derivative_theta0 = arr_error.mean()
-    print("derivée en theta0 = {}".format(derivative_theta0))
-    return derivative_theta0
-
-# Calcule la dérivée de la fonction de cout selon theta1
-def derivative_cost_fct_theta1 (mileage, estimatedPrice, observationsPrice) :
-    arr_error = (estimatedPrice - observationsPrice) * mileage
-    derivative_theta1 = arr_error.mean()
-    print("derivée en theta1 = {}".format(derivative_theta1))
-    return derivative_theta1
-
-# Calcule du nouveau theta selon le learningRate choisis
-def calculate_new_theta (derivativeValue, learningRate):
-    print("nouveau theta = {}".format(derivativeValue * learningRate))
-    return derivativeValue * learningRate
-
-def display_model(mileage, observationsPrice, estimatedPrice):
-    plt.figure(1)
-    plt.scatter(mileage, observationsPrice, marker = 'P')
-    plt.plot(mileage, estimatedPrice, c = "green")
-    plt.grid()
-    plt.show()
-    plt.close()
-
-
-arr_mileage = arr_sorted_datas[:,0]
-arr_observations = arr_sorted_datas[:,1]
-# arr_theta0 = np.linspace(9500, 10000, 10)
-# arr_theta1 = np.linspace(-0.1, 0., 10)
-
-# r = calculate_random_gradient_descente (arr_mileage, arr_observations, arr_theta0, arr_theta1)
-# display_cost_fct(r, arr_theta0, arr_theta1)
-
-learningRate = 1
 theta0 = 0
 theta1 = 0
+learningRate = 0.1
+limit = 1000
 
-arr_estimatedPrice_test = calculate_model(arr_mileage, theta0, theta1)
+print("Initial values :\ntheta0 = {}\ntheta1 = {}\nlearninRate = {}\ntraining_iterations = {}".format(
+	theta0,
+	theta1,
+	learningRate,
+	limit
+))
 
-display_model(arr_mileage, arr_observations, arr_estimatedPrice_test)
+arr_datas = np.array(data, dtype = 'i')
 
-
-
-
-# print(arr_estimatedPrice_test)
+# Min Max Normalization
+arr_mileage_normalized = normalize_minmax(arr_datas[:,0]).reshape((len(arr_datas[:,0])),1)
+arr_price_normalized = normalize_minmax(arr_datas[:,1]).reshape((len(arr_datas[:,1]),1))
+arr_normalized_datas = np.concatenate([arr_mileage_normalized,arr_price_normalized], axis = 1)
 
 count = 0
-limit = 1
-while count < limit :
-    arr_estimatedPrice = calculate_model(arr_mileage, theta0, theta1)
-    # display_model(mileage, observationsPrice, estimatedPrice)
-    mean_error = fonction_de_cout(arr_estimatedPrice, arr_observations)
-    theta0 = theta0 + calculate_new_theta(derivative_cost_fct_theta0(arr_estimatedPrice, arr_observations), learningRate)
-    theta1 = theta1 + calculate_new_theta(derivative_cost_fct_theta1(arr_mileage, arr_estimatedPrice, arr_observations), learningRate)
-    print("{} : Fonction de cout = {} \nNouvelles valeurs de theta0 = {} et theta1 = {}\n".format(count, mean_error, theta0, theta1))
-    count += 1
+while (count < limit) :
+	# print(count)
+	# print("fonction de cout : ", cost_fct(arr_normalized_datas, theta0,theta1))
+	# print("drv en theta0 : ", drv_cost_fct_theta0 (arr_normalized_datas,theta0,theta1)) # facteur 2
+	# print("drv en theta1 : ", drv_cost_fct_theta1 (arr_normalized_datas,theta0,theta1)) # facteur 2
+	tmp_theta0 = theta0 - learningRate * drv_cost_fct_theta0 (arr_normalized_datas, theta0,theta1)
+	tmp_theta1 = theta1 - learningRate * drv_cost_fct_theta1 (arr_normalized_datas , theta0, theta1)
+	theta0 = tmp_theta0
+	theta1 = tmp_theta1
+	# print("nouveau theta 0 = ", theta0)
+	# print("nouveau theta 1 = ", theta1)
+	# print("\n")
+	count+=1
+
+arr_estimated_price = estimatePrice(arr_normalized_datas[:,0], theta0, theta1)
+arr_estimated_price_unormalized = unnormalize_minmax(arr_datas[:,1] ,arr_estimated_price)
+
+final_theta0 = unnormalize_minmax(arr_datas[:,1] ,estimatePrice(0, theta0, theta1))
+final_theta1 = (unnormalize_minmax(arr_datas[:,1] ,estimatePrice(1, theta0, theta1)) - unnormalize_minmax(arr_datas[:,1] ,estimatePrice(0, theta0, theta1))) / unnormalize_minmax(arr_datas[:,0], 1)
+
+# arr_estimated_price_final = estimatePrice(arr_normalized_datas[:,0], final_theta0, final_theta1)
+
+with open("model_parameters.txt", 'w') as model_parameters_file :
+	model_parameters_file.writelines([str(final_theta0), "\n", str(final_theta1)])
+
+print("\nResults :\ntheta0 = {}\ntheta1= {}".format(final_theta0, final_theta1))
+
 
