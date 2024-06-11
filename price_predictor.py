@@ -1,4 +1,5 @@
 import sys
+import libft_linear_regression as lr
 
 args = sys.argv
 if len(args) != 2 or int(args[-1]) < 0 or int(args[-1]) > 1000000:
@@ -7,13 +8,9 @@ if len(args) != 2 or int(args[-1]) < 0 or int(args[-1]) > 1000000:
 
 mileage = int(args[-1])
 
-model_parameters_file = open("model_parameters.txt", "r")
-list_str_parameters = model_parameters_file.readlines()
-
-theta0 = float(list_str_parameters[0])
-theta1 = float(list_str_parameters[1])
-
-model_parameters_file.close()
+dict_params = lr.read_model_parameters()
+theta0 = dict_params["theta0"]
+theta1 = dict_params["theta1"]
 
 estimated_price = theta0 + theta1 * mileage
 

@@ -2,22 +2,9 @@ import sys
 import matplotlib.pyplot as plt
 import numpy as np
 
-from libft_linear_regression import read_datas
+from libft_linear_regression import *
 
 
-def display_values(arr_mileage, arr_price, id_graph):
-	fig = plt.figure(id_graph)
-	plt.scatter(arr_mileage, arr_price, marker = 'P')
-	plt.grid()
-	plt.show()
-	plt.close()
-
-def display_model(arr_mileage,  arr_estimated_price, id_graph):
-	fig = plt.figure(id_graph)
-	plt.plot(arr_mileage, arr_estimated_price, c = "green")
-	plt.grid()
-	plt.show()
-	plt.close()
 
 args = sys.argv
 if len(args) != 2 :
@@ -26,8 +13,16 @@ if len(args) != 2 :
 
 file_name = args[-1]
 data = read_datas (file_name)
-del(data[0])
 
 arr_datas = np.array(data, dtype = 'i')
-
 display_values(arr_datas[:,0], arr_datas[:,1], 1)
+
+dict_params = read_model_parameters()
+theta0 = dict_params["theta0"]
+theta1 = dict_params["theta1"]
+
+arr_estimated_price = theta0 + theta1 * arr_datas[:,0]
+
+display_model (arr_datas[:,0], arr_estimated_price, 2)
+
+display_values_and_model(arr_datas[:,0],arr_datas[:,1],arr_estimated_price, 3)
