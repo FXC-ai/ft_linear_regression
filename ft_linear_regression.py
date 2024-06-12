@@ -44,21 +44,18 @@ while (count < limit) :
 arr_estimated_price = estimatePrice(arr_normalized_datas[:,0], theta0, theta1)
 arr_estimated_price_unormalized = unnormalize_minmax_arr(arr_datas[:,1] ,arr_estimated_price)
 
-
 estimated_norm_price_max = estimatePrice(1, theta0, theta1)
 estimated_norm_price_min = estimatePrice(0, theta0, theta1)
-final_theta1 = (unnormalize_minmax(estimated_norm_price_max, arr_datas[:,1]) - unnormalize_minmax(estimated_norm_price_min, arr_datas[:,1])) / (arr_datas[:,0].max() - arr_datas[:,0].min())
 
+final_theta1 = (unnormalize_minmax(estimated_norm_price_max, arr_datas[:,1]) - unnormalize_minmax(estimated_norm_price_min, arr_datas[:,1])) / (arr_datas[:,0].max() - arr_datas[:,0].min())
 final_theta0 = unnormalize_minmax(estimated_norm_price_min, arr_datas[:,1]) - final_theta1 * arr_datas[:,0].min()
 
 with open("model_parameters.txt", 'w') as model_parameters_file :
 	model_parameters_file.writelines([str(final_theta0), "\n", str(final_theta1)])
 
-
 print("\nLinear regression : OK")
 print("theta0 = ", final_theta0)
 print("theta1 = ", final_theta1)
-
 
 if flag == 1 :
 	print("Fonction de coût = ", cost)
