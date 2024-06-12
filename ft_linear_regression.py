@@ -8,14 +8,10 @@ if len(args) != 3 :
 	print("Please enter valid args : python3 ft_linear_regression.py [file name].csv [flag bonus 0 or 1]")
 	exit(0)
 
-# 
 file_name = args[1]
-# arr_datas = read_datas_to_array (file_name)
-
 flag = int(args[-1])
 
 arr_datas = read_datas_to_array(file_name)
-
 
 theta0 = 0
 theta1 = 0
