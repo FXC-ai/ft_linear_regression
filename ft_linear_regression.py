@@ -4,21 +4,25 @@ import numpy as np
 from libft_linear_regression import *
 
 args = sys.argv
-if len(args) != 2 :
-	print("Please choose a flag :\n0 : without bonus\n1 : with bonus\n")
+if len(args) != 3 :
+	print("Please enter valid args : python3 ft_linear_regression.py [file name].csv [flag bonus 0 or 1]")
 	exit(0)
 
-# file_name = args[-1]
+# 
+file_name = args[1]
 # arr_datas = read_datas_to_array (file_name)
 
 flag = int(args[-1])
 
+arr_datas = read_datas_to_array(file_name)
+
+
 theta0 = 0
 theta1 = 0
 learningRate = 0.1
-limit = 5000
+limit = 1300
 
-print("Initial values :\ntheta0 = {}\ntheta1 = {}\nlearninRate = {}\ntraining_iterations = {}".format(
+print("Initial values :\ntheta0 = {}\ntheta1 = {}\nlearningRate = {}\ntraining_iterations = {}".format(
 	theta0,
 	theta1,
 	learningRate,
@@ -51,17 +55,13 @@ final_theta1 = (unnormalize_minmax(estimated_norm_price_max, arr_datas[:,1]) - u
 
 final_theta0 = unnormalize_minmax(estimated_norm_price_min, arr_datas[:,1]) - final_theta1 * arr_datas[:,0].min()
 
-print("test ", final_theta1)
-print("test ", arr_datas[:,0].max() - arr_datas[:,0].min())
-print("test ", final_theta0)
-print("test ", estimated_norm_price_min)
-
-
 with open("model_parameters.txt", 'w') as model_parameters_file :
 	model_parameters_file.writelines([str(final_theta0), "\n", str(final_theta1)])
 
 
-print("Linear regression : OK")
+print("\nLinear regression : OK")
+print("theta0 = ", final_theta0)
+print("theta1 = ", final_theta1)
 
 
 if flag == 1 :

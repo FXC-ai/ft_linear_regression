@@ -93,5 +93,3 @@ def display_cost_fct(arr_normalized_datas):
     ax1.set_ylabel("Theta1")
     ax1.set_zlabel("Cost")
     plt.show()
-
-arr_datas = read_datas_to_array("data.csv")
