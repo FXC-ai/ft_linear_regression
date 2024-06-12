@@ -8,9 +8,13 @@ if len(args) != 2 or int(args[-1]) < 0 or int(args[-1]) > 1000000:
 
 mileage = int(args[-1])
 
+# mileage = lr.normalize_minmax(mileage, lr.arr_datas[:,0])
+
 dict_params = lr.read_model_parameters()
 theta0 = dict_params["theta0"]
 theta1 = dict_params["theta1"]
+
+print("Mes parametres : " ,theta0, theta1)
 
 estimated_price = theta0 + theta1 * mileage
 

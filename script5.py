@@ -3,10 +3,10 @@ import csv
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 
-def normalize_minmax (arr_data):
+def normalize_minmax_arr (arr_data):
 	return (arr_data - arr_data.min()) / (arr_data.max() - arr_data.min())
 
-def unnormalize_minmax (arr_data, arr_normalized_data):
+def unnormalize_minmax_arr (arr_data, arr_normalized_data):
 	return arr_normalized_data * (arr_data.max() - arr_data.min()) + arr_data.min()
 
 def estimatePrice(mileage, theta0, theta1):
@@ -106,8 +106,8 @@ print("Données triées par ordre décroissant de kilométrage : ")
 print(arr_datas)
 print("\n")
 
-arr_mileage_normalized = normalize_minmax(arr_datas[:,0]).reshape((len(arr_datas[:,0])),1)
-arr_price_normalized = normalize_minmax(arr_datas[:,1]).reshape((len(arr_datas[:,1]),1))
+arr_mileage_normalized = normalize_minmax_arr(arr_datas[:,0]).reshape((len(arr_datas[:,0])),1)
+arr_price_normalized = normalize_minmax_arr(arr_datas[:,1]).reshape((len(arr_datas[:,1]),1))
 arr_normalized_datas = np.concatenate([arr_mileage_normalized,arr_price_normalized], axis = 1)
 
 theta0 = 0
@@ -139,7 +139,7 @@ arr_estimated_price = estimatePrice(arr_normalized_datas[:,0], theta0, theta1)
 # display_model(arr_normalized_datas[:,0], arr_normalized_datas[:,1], arr_estimated_price, 1)
 
 
-arr_estimated_price_unormalized = unnormalize_minmax(arr_datas[:,1] ,arr_estimated_price)
+arr_estimated_price_unormalized = unnormalize_minmax_arr(arr_datas[:,1] ,arr_estimated_price)
 
 display_model(arr_datas[:,0], arr_datas[:,1], arr_estimated_price_unormalized, 1)
 
@@ -147,11 +147,11 @@ display_model(arr_datas[:,0], arr_datas[:,1], arr_estimated_price_unormalized, 1
 # def display_model(arr_mileage, theta0, theta1, id_graph):
 
 
-# theta0 = unnormalize_minmax(arr_datas[:,1], theta0)
-# theta1 = unnormalize_minmax(arr_datas[:,0], theta1) / unnormalize_minmax(arr_datas[:,1], theta1)
+# theta0 = unnormalize_minmax_arr(arr_datas[:,1], theta0)
+# theta1 = unnormalize_minmax_arr(arr_datas[:,0], theta1) / unnormalize_minmax_arr(arr_datas[:,1], theta1)
 
 
-# theta1 = (unnormalize_minmax(arr_datas[:,1], theta1) - unnormalize_minmax(arr_datas[:,1], 0)) / (arr_datas[:,0].max() - arr_datas[:,0].min())
+# theta1 = (unnormalize_minmax_arr(arr_datas[:,1], theta1) - unnormalize_minmax_arr(arr_datas[:,1], 0)) / (arr_datas[:,0].max() - arr_datas[:,0].min())
 
 # theta1 = theta1 * (arr_datas[:,1].max() - arr_datas[:,1].min()) / (arr_datas[:,0].max() - arr_datas[:,0].min())
 
