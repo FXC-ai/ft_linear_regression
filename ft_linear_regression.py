@@ -41,6 +41,9 @@ while (count < limit) :
 	theta1 = tmp_theta1
 	count+=1
 
+print("\nLinear regression : OK")
+print("Normalized theta0 = {}\nNormalized theta1 = {}".format(theta0, theta1))
+
 arr_estimated_price = estimatePrice(arr_normalized_datas[:,0], theta0, theta1)
 arr_estimated_price_unormalized = unnormalize_minmax_arr(arr_datas[:,1] ,arr_estimated_price)
 
@@ -53,14 +56,13 @@ final_theta0 = unnormalize_minmax(estimated_norm_price_min, arr_datas[:,1]) - fi
 with open("model_parameters.txt", 'w') as model_parameters_file :
 	model_parameters_file.writelines([str(final_theta0), "\n", str(final_theta1)])
 
-print("\nLinear regression : OK")
 print("theta0 = ", final_theta0)
 print("theta1 = ", final_theta1)
 
 if flag == 1 :
 	print("Fonction de coût = ", cost)
-	display_values_and_model(arr_mileage_normalized, arr_price_normalized, arr_estimated_price, 1)
 	display_values(arr_datas[:,0], arr_datas[:,1], 2)
 	display_model(arr_datas[:,0], arr_estimated_price_unormalized,3)
+	display_values_and_model(arr_mileage_normalized, arr_price_normalized, arr_estimated_price, 1)
 	display_values_and_model(arr_datas[:,0], arr_datas[:,1], arr_estimated_price_unormalized, 4)
 	display_cost_fct(arr_normalized_datas)

@@ -14,7 +14,6 @@ def read_datas_to_array (file_name) :
 	arr_datas = np.array(datas, dtype = 'i')
 	return arr_datas
 
-
 def normalize_minmax (value, arr_data) :
 	return (value - arr_data.min()) / (arr_data.max() - arr_data.min())
 
@@ -57,6 +56,7 @@ def read_model_parameters():
 def display_values(arr_mileage, arr_price, id_graph):
 	fig = plt.figure(id_graph)
 	plt.scatter(arr_mileage, arr_price, marker = 'P')
+	fig.suptitle("Observations only")
 	plt.grid()
 	plt.show()
 	plt.close()
@@ -64,6 +64,7 @@ def display_values(arr_mileage, arr_price, id_graph):
 def display_model(arr_mileage,  arr_estimated_price, id_graph):
 	fig = plt.figure(id_graph)
 	plt.plot(arr_mileage, arr_estimated_price, c = "green")
+	fig.suptitle("Predictions only")
 	plt.grid()
 	plt.show()
 	plt.close()
@@ -72,6 +73,7 @@ def display_values_and_model(arr_mileage, arr_price, arr_estimated_price, id_gra
 	fig = plt.figure(id_graph)
 	plt.scatter(arr_mileage, arr_price, marker = 'P')
 	plt.plot(arr_mileage, arr_estimated_price, c = "green")
+	fig.suptitle("Observations and predictions")
 	plt.grid()
 	plt.show()
 	plt.close()
@@ -80,8 +82,8 @@ def display_cost_fct(arr_normalized_datas):
     fig = plt.figure()
     # 3D Surface Plot
     ax1 = plt.axes(projection='3d')
-    arr_theta0 = np.linspace(-1, 2, 100)
-    arr_theta1 = np.linspace(-1, 2, 100)
+    arr_theta0 = np.linspace(-2, 4, 100)
+    arr_theta1 = np.linspace(-4, 2, 100)
     theta0_grid, theta1_grid = np.meshgrid(arr_theta0, arr_theta1)
     values = np.zeros_like(theta0_grid)
     for i in range(len(arr_theta0)):
