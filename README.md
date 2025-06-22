@@ -1,5 +1,10 @@
 Ceci est le fruit de mon travail dans le but de valider un projet de spécialisation au sein de l'école 42.
 
+<script type="text/javascript" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
 # Installations nécessaires au projet
 
 Pour installer matplotlib et numpy :
@@ -152,16 +157,14 @@ $$
 
 Nous obtenons :
 
-$$
-cost(\theta_0, \theta_1) = \frac{1}{m} * \sum\limits_{i=0}^{m-1}\theta_0^2+2*\theta_0*\theta_1*mileage[i]+\theta_1^2*mileage[i]^2-2\theta_0*price[i]-2*\theta_1*price[i]*mileage[i]+price[i]^2
-$$
+<pre> ``` cost(θ₀, θ₁) = (1/m) * Σ[i=0 to m-1] (θ₀² + 2θ₀θ₁·mileage[i] + θ₁²·mileage[i]² - 2θ₀·price[i] - 2θ₁·price[i]·mileage[i] + price[i]²) ``` </pre> (github ne veut pas afficher cette formule correctement...)
 
 ### Dérivée partielle selon theta0
 
 Nous pouvons calculer la dérivée de notre fonction de coût terme à terme selon theta0, nous obtenons :
 
 $$
-\frac {\partial cost(\theta_0, \theta_1)}{\partial \theta_0} = \frac{1}{m} * \sum\limits_{i=0}^{m-1}2 * \theta_0+2*\theta_1*mileage[i]+0-2*price[i]-0+0
+<pre> ``` \frac {\partial cost(\theta_0, \theta_1)}{\partial \theta_0} = \frac{1}{m} * \sum\limits_{i=0}^{m-1}2 * \theta_0+2*\theta_1*mileage[i]+0-2*price[i] ``` </pre> (github ne veut pas afficher cette formule correctement...)
 $$
 
 $$
