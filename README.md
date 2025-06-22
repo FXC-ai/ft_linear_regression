@@ -1,3 +1,5 @@
+Ceci est le fruit de mon travail dans le but de valider un projet de spécialisation au sein de l'école 42.
+
 # Installations nécessaires au projet
 
 Pour installer matplotlib et numpy :
