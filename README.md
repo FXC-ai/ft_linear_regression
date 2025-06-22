@@ -81,7 +81,7 @@ Le sujet fournit le dataset suivant :
 
 Voici la représentation graphique de ce dataset :
 
-![_2.png](https://github.com/FXC-ai/ft_linear_regression/blob/master/_2.png)
+![figure_2.png](https://github.com/FXC-ai/ft_linear_regression/blob/master/Figure_2.png)
 
 ## Le modèle
 
@@ -121,7 +121,7 @@ Cette fonction ressemble au calcul de la variance. Le résultat est la moyenne d
 
 Il est possible d’en faire une représentation graphique en mettant les valeurs de theta0 en abscisse et les valeurs de theta1 en ordonnée. Le résultat du calcul de la fonction sera sur l’axe z. On obtient le résultat suivant :
 
-![_1.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/4bc43969-1fca-4a09-8d55-3219240d78af/2b71439a-32fb-48b0-9a92-87bc3b300860/_1.png)
+![_figure_1.png](https://github.com/FXC-ai/ft_linear_regression/blob/master/Figure_1.png)
 
 N.B. : les valeurs des paramètres sur le graphiques ne correspondent pas à la réalité car elles ont été normalisées. Nous verrons pourquoi plus loin.
 
