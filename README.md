@@ -81,7 +81,7 @@ Le sujet fournit le dataset suivant :
 
 Voici la représentation graphique de ce dataset :
 
-![Figure_2.png](https://github.com/FXC-ai/ft_linear_regression/blob/master/Figure_2.png)
+![_2.png](https://github.com/FXC-ai/ft_linear_regression/blob/master/_2.png)
 
 ## Le modèle
 
@@ -121,7 +121,7 @@ Cette fonction ressemble au calcul de la variance. Le résultat est la moyenne d
 
 Il est possible d’en faire une représentation graphique en mettant les valeurs de theta0 en abscisse et les valeurs de theta1 en ordonnée. Le résultat du calcul de la fonction sera sur l’axe z. On obtient le résultat suivant :
 
-![Figure_1.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/4bc43969-1fca-4a09-8d55-3219240d78af/2b71439a-32fb-48b0-9a92-87bc3b300860/Figure_1.png)
+![_1.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/4bc43969-1fca-4a09-8d55-3219240d78af/2b71439a-32fb-48b0-9a92-87bc3b300860/_1.png)
 
 N.B. : les valeurs des paramètres sur le graphiques ne correspondent pas à la réalité car elles ont été normalisées. Nous verrons pourquoi plus loin.
 
@@ -327,7 +327,7 @@ def read_model_parameters():
 	return {"theta0" : theta0, "theta1" : theta1}
 
 def display_values(arr_mileage, arr_price, id_graph):
-	fig = plt.figure(id_graph)
+	fig = plt.(id_graph)
 	plt.scatter(arr_mileage, arr_price, marker = 'P')
 	fig.suptitle("Observations only")
 	plt.grid()
@@ -335,7 +335,7 @@ def display_values(arr_mileage, arr_price, id_graph):
 	plt.close()
 
 def display_model(arr_mileage,  arr_estimated_price, id_graph):
-	fig = plt.figure(id_graph)
+	fig = plt.(id_graph)
 	plt.plot(arr_mileage, arr_estimated_price, c = "green")
 	fig.suptitle("Predictions only")
 	plt.grid()
@@ -343,7 +343,7 @@ def display_model(arr_mileage,  arr_estimated_price, id_graph):
 	plt.close()
 
 def display_values_and_model(arr_mileage, arr_price, arr_estimated_price, id_graph):
-	fig = plt.figure(id_graph)
+	fig = plt.(id_graph)
 	plt.scatter(arr_mileage, arr_price, marker = 'P')
 	plt.plot(arr_mileage, arr_estimated_price, c = "green")
 	fig.suptitle("Observations and predictions")
@@ -352,7 +352,7 @@ def display_values_and_model(arr_mileage, arr_price, arr_estimated_price, id_gra
 	plt.close()
 
 def display_cost_fct(arr_normalized_datas):
-    fig = plt.figure()
+    fig = plt.()
     # 3D Surface Plot
     ax1 = plt.axes(projection='3d')
     arr_theta0 = np.linspace(-2, 4, 100)
@@ -484,7 +484,7 @@ Les valeurs optimales des paramètres obtenus par le modèle sont :
 
 ## Représentation graphique
 
-![Figure_4.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/4bc43969-1fca-4a09-8d55-3219240d78af/e473a9e5-1350-4a09-bf43-93b3fc463d25/Figure_4.png)
+![Figure_4.png](https://github.com/FXC-ai/ft_linear_regression/blob/master/Figure_4.png)
 
 # Sources
 
