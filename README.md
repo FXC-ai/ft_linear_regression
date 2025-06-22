@@ -81,7 +81,7 @@ Le sujet fournit le dataset suivant :
 
 Voici la représentation graphique de ce dataset :
 
-![Figure_2.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/4bc43969-1fca-4a09-8d55-3219240d78af/7f238468-5857-4610-bdb2-8647f1552296/Figure_2.png)
+![Figure_2.png](https://github.com/FXC-ai/ft_linear_regression/blob/master/Figure_2.png)
 
 ## Le modèle
 
