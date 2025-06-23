@@ -1,10 +1,5 @@
 Ceci est le fruit de mon travail dans le but de valider un projet de spécialisation au sein de l'école 42.
 
-<script type="text/javascript" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
-
-
 # Installations nécessaires au projet
 
 Pour installer matplotlib et numpy :
